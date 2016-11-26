@@ -23,3 +23,10 @@ Follow these steps to complete the configuration of your command API endpoint
 1. When completing the blueprint configuration select "Open" for security on the "Configure triggers" page.
 1. Enter a name for your execution role in the "Role name" field. Your function's execution role needs kms:Decrypt permissions. We have pre-selected the "KMS decryption permissions" policy template that will automatically add these permissions.
 1. Update the URL for your Slack slash command with the invocation URL for the created API resource in the prod stage.
+
+## KMS code from the boilerplate
+
+```python
+ENCRYPTED_EXPECTED_TOKEN = os.environ['kmsEncryptedToken']
+kms = boto3.client('kms')
+expected_token = kms.decrypt(CiphertextBlob=b64decode(ENCRYPTED_EXPECTED_TOKEN))['Plaintext']```
