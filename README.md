@@ -1,5 +1,7 @@
 # demon
 
+## Instructions from the boilerplate
+
 This function handles a Slack slash command and echoes the details back to the user.
 
 Follow these steps to configure the slash command in Slack:
