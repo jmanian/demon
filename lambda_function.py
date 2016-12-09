@@ -35,6 +35,9 @@ def lambda_handler(event, context):
         logger.error("Request token (%s) does not match expected", token)
         return respond(Exception('Invalid request token'))
 
+    if 'text' not in params:
+        return respond(None, "")
+
     user_id = params['user_id'][0]
     text = params['text'][0]
     if user_id != 'USLACKBOT':
