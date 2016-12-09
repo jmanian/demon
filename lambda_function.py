@@ -38,12 +38,16 @@ def lambda_handler(event, context):
     user_id = params['user_id'][0]
     text = params['text'][0]
     if user_id != 'USLACKBOT':
-        if re.compile(r'\bgreat(er|est)?\b', re.I).search(text) != None:
-            text = "Ah, the greatest hug!"
+        if re.search(r"\bgreat(er|est)?\b", text, re.I) != None:
+            word = "hug"
+            match = re.search(r"\bgreat(?:er|est)?\b (\w+)", text, re.I)
+            if match:
+                word = match.group(1)
+            text = "Ah, the greatest %s!" % word
             username = "grill_vogel"
             icon_url = 'http://taargus.taarg.us/bridge/grill_vogel.jpg'
             return respond(None, text, username, icon_url)
-        if re.compile(r'\bbingo\b', re.I).search(text) != None:
+        if re.compile(r"\bbingo\b", re.I).search(text) != None:
             text = "Bingo, bye bye!"
             username = 'peach'
             icon_url = 'http://taargus.taarg.us/bridge/peach.png'
