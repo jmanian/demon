@@ -48,12 +48,12 @@ def lambda_handler(event, context):
                 word = match.group(1)
             text = "Ah, the greatest %s!" % word
             username = "grill_vogel"
-            icon_url = 'http://taargus.taarg.us/bridge/grill_vogel.jpg'
+            icon_url = 'https://jmanian.github.io/demon/icons/grill_vogel.jpg'
             return respond(None, text, username, icon_url)
         if re.compile(r"\bbingo\b", re.I).search(text) != None:
             text = "Bingo, bye bye!"
             username = 'peach'
-            icon_url = 'http://taargus.taarg.us/bridge/peach.png'
+            icon_url = 'https://jmanian.github.io/demon/icons/peach.png'
             return respond(None, text, username, icon_url)
 
     return respond(None, "")
