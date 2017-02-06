@@ -27,6 +27,9 @@ def respond(err, text=None, username=None, icon_url=None):
         },
     }
 
+def icon_url(filename):
+    return "https://jmanian.github.io/demon/icons/%s" % filename
+
 def lambda_handler(event, context):
     logger.info("Event received: %s", event)
     params = parse_qs(event['body'])
@@ -48,12 +51,10 @@ def lambda_handler(event, context):
                 word = match.group(1)
             text = "Ah, the greatest %s!" % word
             username = "grill_vogel"
-            icon_url = 'https://jmanian.github.io/demon/icons/grill_vogel.jpg'
-            return respond(None, text, username, icon_url)
+            return respond(None, text, username, icon_url("grill_vogel.jpg"))
         if re.compile(r"\bbingo\b", re.I).search(text) != None:
             text = "Bingo, bye bye!"
             username = 'peach'
-            icon_url = 'https://jmanian.github.io/demon/icons/peach.png'
-            return respond(None, text, username, icon_url)
+            return respond(None, text, username, icon_url("peach.png"))
 
     return respond(None, "")
