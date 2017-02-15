@@ -53,7 +53,7 @@ def lambda_handler(event, context):
             username = "grill_vogel"
             return respond(None, text, username, icon_url("grill_vogel.jpg"))
         if re.compile(r"\bbingo\b", re.I).search(text) != None:
-            text = "Bingo, bye bye!"
+            text = "Bingo, bye-bye!"
             username = 'peach'
             return respond(None, text, username, icon_url("peach.png"))
 
