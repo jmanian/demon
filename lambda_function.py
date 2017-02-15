@@ -46,7 +46,7 @@ def lambda_handler(event, context):
     if user_id != 'USLACKBOT':
         if re.search(r"\bgreat(er|est)?\b", text, re.I) != None:
             word = "hug"
-            match = re.search(r"\bgreat(?:er|est)?\b (\w+)", text, re.I)
+            match = re.search(r"\bgreat(?:er|est)?\b (\S+)", text, re.I)
             if match:
                 word = match.group(1)
             text = "Ah, the greatest %s!" % word
