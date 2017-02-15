@@ -32,7 +32,7 @@ def icon_url(filename):
 
 def lambda_handler(event, context):
     logger.info("Event received: %s", event)
-    params = parse_qs(event['body'])
+    params = parse_qs(event['body'].encode('ascii'))
     token = params['token'][0]
     if token != expected_token:
         logger.error("Request token (%s) does not match expected", token)
