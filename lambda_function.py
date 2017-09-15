@@ -12,19 +12,23 @@ logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 
 
-def respond(text=None, username=None, icon_url=None):
+def response(text=None, username=None, icon_url=None, thread_ts=None):
     body = {
         'text': text,
         'username': username,
-        'icon_url': icon_url
+        'icon_url': icon_url,
+        'thread_ts': thread_ts
     }
 
-    return respond_base('200', json.dumps(body))
+    return base_response('200', json.dumps(body))
 
-def respond_error(err):
-    return respond_base('400', err.message)
+def blank_response():
+    return base_response('200', None)
 
-def respond_base(code, body):
+def error_response(err):
+    return base_response('400', err.message)
+
+def base_response(code, body):
     return {
         'statusCode': code,
         'body': body,
@@ -42,13 +46,14 @@ def lambda_handler(event, context):
     token = params['token'][0]
     if token != expected_token:
         logger.error("Request token (%s) does not match expected", token)
-        return respond_error(Exception('Invalid request token'))
+        return error_response(Exception('Invalid request token'))
 
     if 'text' not in params:
-        return respond("")
+        return blank_response()
 
     user_id = params['user_id'][0]
     text = params['text'][0]
+    thread_ts = params['thread_ts'] if 'thread_ts' in params else None
     if user_id != 'USLACKBOT':
         if re.search(r"\bgreat(er|est)?\b", text, re.I) != None:
             word = "hug"
@@ -57,10 +62,10 @@ def lambda_handler(event, context):
                 word = match.group(1)
             text = "Ah, the greatest %s!" % word
             username = "grill_vogel"
-            return respond(text, username, icon_url("grill_vogel.jpg"))
+            return response(text, username, icon_url("grill_vogel.jpg"))
         if re.compile(r"\bbingo\b", re.I).search(text) != None:
             text = "Bingo, bye-bye!"
             username = 'peach'
-            return respond(text, username, icon_url("peach.png"))
+            return response(text, username, icon_url("peach.png"))
 
-    return respond("")
+    return blank_response()
