@@ -12,16 +12,22 @@ logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 
 
-def respond(err, text=None, username=None, icon_url=None):
+def respond(text=None, username=None, icon_url=None):
     body = {
         'text': text,
         'username': username,
         'icon_url': icon_url
     }
 
+    return respond_base('200', json.dumps(body))
+
+def respond_error(err):
+    return respond_base('400', err.message)
+
+def respond_base(code, body):
     return {
-        'statusCode': '400' if err else '200',
-        'body': err.message if err else json.dumps(body),
+        'statusCode': code,
+        'body': body,
         'headers': {
             'Content-Type': 'application/json',
         },
@@ -36,10 +42,10 @@ def lambda_handler(event, context):
     token = params['token'][0]
     if token != expected_token:
         logger.error("Request token (%s) does not match expected", token)
-        return respond(Exception('Invalid request token'))
+        return respond_error(Exception('Invalid request token'))
 
     if 'text' not in params:
-        return respond(None, "")
+        return respond("")
 
     user_id = params['user_id'][0]
     text = params['text'][0]
@@ -51,10 +57,10 @@ def lambda_handler(event, context):
                 word = match.group(1)
             text = "Ah, the greatest %s!" % word
             username = "grill_vogel"
-            return respond(None, text, username, icon_url("grill_vogel.jpg"))
+            return respond(text, username, icon_url("grill_vogel.jpg"))
         if re.compile(r"\bbingo\b", re.I).search(text) != None:
             text = "Bingo, bye-bye!"
             username = 'peach'
-            return respond(None, text, username, icon_url("peach.png"))
+            return respond(text, username, icon_url("peach.png"))
 
-    return respond(None, "")
+    return respond("")
