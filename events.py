@@ -51,7 +51,7 @@ def process_event(event):
                 post_message(channel, thread_ts, post_text, username, "grill_vogel.jpg")
 
             # Peach
-            if re.compile(r"\bbingo\b", re.I).search(text) != None:
+            if re.search(r"\bbingo\b", text, re.I) != None:
                 post_text = "Bingo, bye-bye!"
                 username = 'Peach'
                 post_message(channel, thread_ts, post_text, username, "peach.png")
@@ -95,5 +95,6 @@ def verification_response(body):
         },
     }
 
+# files go in icons/
 def icon_url(filename):
     return "https://jmanian.github.io/demon/icons/%s" % filename
