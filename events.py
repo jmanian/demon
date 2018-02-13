@@ -45,7 +45,7 @@ def respond_to_text(channel, thread_ts, text):
     # Grill Vogel
     if re.search(r"\bgreat(er|est)?\b", text, re.I) != None:
         word = "hug"
-        match = re.search(r"\bgreat(?:er|est)?\b (\S+)", text, re.I)
+        match = re.search(r"\bgreat(?:er|est)?\b ((?:\w|-|')+)", text, re.I)
         if match:
             word = match.group(1)
         post_text = "Ah, the greatest %s!" % word
