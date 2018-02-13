@@ -87,3 +87,6 @@ ENV/
 
 # Rope project settings
 .ropeproject
+
+# zipped code for AWS
+code.zip
