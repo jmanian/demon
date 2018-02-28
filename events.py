@@ -2,6 +2,7 @@ import json
 import logging
 import os
 import re
+import random
 from slackclient import SlackClient
 
 logger = logging.getLogger()
@@ -57,6 +58,19 @@ def respond_to_text(channel, thread_ts, text):
         post_text = "Bingo, bye-bye!"
         username = 'Peach'
         post_message(channel, thread_ts, post_text, username, "peach.png")
+
+    # Ivan
+    if re.search(r"\bivan\b", text, re.I) != None:
+        options = [
+            'I just say fuck it and go numb',
+            "now all of my jokes will be comedy-based",
+            "why don't you just say what you mean if it's so important",
+            "I don't know what it is or what it means, but I instantly hate everything about it",
+            "yeah cool good"
+        ]
+        post_text = random.choice(options)
+        username = 'Ivan Anderson'
+        post_message(channel, thread_ts, post_text, username, 'ivan.png')
 
 def post_message(channel, thread_ts, text, username, icon_name):
     if thread_ts == None:
