@@ -89,4 +89,4 @@ ENV/
 .ropeproject
 
 # zipped code for AWS
-code.zip
+build.zip
