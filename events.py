@@ -3,6 +3,8 @@ import logging
 import os
 import re
 import random
+
+# These dependencies need to be explicitly added to build.sh
 from slackclient import SlackClient
 
 logger = logging.getLogger()
