@@ -1,3 +1,6 @@
-pip install slackclient --upgrade -t .
-zip -r build .
-git clean -df
+mkdir build
+cp *.py build
+pip install slackclient -U -t build
+cd build
+zip -r ../build .
+cd ..
