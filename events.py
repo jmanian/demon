@@ -74,15 +74,6 @@ def respond_to_text(channel, thread_ts, text):
         username = 'Ivan Anderson'
         post_message(channel, thread_ts, post_text, username, 'ivan.png')
 
-    # File test
-    if text == 'zvbxrpl':
-        post_text = open('sample.txt').read()
-        sc.api_call(
-            "chat.postMessage",
-            channel=channel,
-            text=post_text
-        )
-
 def post_message(channel, thread_ts, text, username, icon_name):
     if thread_ts == None:
         sc.api_call(
