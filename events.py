@@ -116,3 +116,12 @@ def verification_response(body):
 # files go in icons/
 def icon_url(filename):
     return "https://jmanian.github.io/demon/icons/%s" % filename
+
+
+# general NLP-based bot input output function
+def nlp_respond_to_text(text):
+    from chaos import evaluate
+    return evaluate.evaluateSentence(text,
+        model_file  = "./chaos/save/model/ivan/1-1_128/1000_backup_bidir_model.tar",
+        corpus_file = "./chaos/data/ivan.txt")
+
