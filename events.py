@@ -113,7 +113,7 @@ def verification_response(body):
         },
     }
 
-# files go in icons/
+# files go in docs/icons/
 def icon_url(filename):
     return "https://jmanian.github.io/demon/icons/%s" % filename
 
