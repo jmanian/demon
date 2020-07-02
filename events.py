@@ -53,7 +53,7 @@ def respond_to_text(channel, thread_ts, text):
             word = match.group(1)
         post_text = "Ah, the greatest %s!" % word
         username = "Grill Vogel"
-        post_message(channel, thread_ts, post_text, username, "grill_vogel.jpg")
+        # post_message(channel, thread_ts, post_text, username, "grill_vogel.jpg")
 
     # Peach
     if re.search(r"\bbingo\b", text, re.I) != None:
@@ -72,7 +72,7 @@ def respond_to_text(channel, thread_ts, text):
         ]
         post_text = random.choice(options)
         username = 'Ivan Anderson'
-        post_message(channel, thread_ts, post_text, username, 'ivan.png')
+        # post_message(channel, thread_ts, post_text, username, 'ivan.png')
 
 def post_message(channel, thread_ts, text, username, icon_name):
     if thread_ts == None:
