@@ -29,7 +29,7 @@ def lambda_handler(event, context):
     return empty_response(200)
 
 def process_event(event):
-    if event['type'] == 'message':
+    if event['type'] in ['message', 'app_mention']:
         # don't respond to self or slackbot
         if 'bot_id' in event and event['bot_id'] == bot_id:
             return
